@@ -9,10 +9,16 @@ namespace KhadijaSadki_EindtestFundamentals.Models
 {
     public class SchrijfNaarBestand
     {
-        public static void LogActivity(string content)
+       
+        public static void SchrijfLijstNaarBestand<T>(List<T> list, string path)
         {
-
-            File.AppendAllText("TextFiles/Bestellingen.txt.", content);
+            using (var fs = new FileStream(path, FileMode.Create))
+            {
+                using (var sw = new StreamWriter(fs))
+                {
+                    list.ForEach(x => sw.WriteLine(x));
+                }
+            }
         }
     }
 }
